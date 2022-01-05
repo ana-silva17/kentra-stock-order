@@ -17,7 +17,6 @@ import java.util.List;
 @Table
 public class QuoteRequest extends AuditModel{
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

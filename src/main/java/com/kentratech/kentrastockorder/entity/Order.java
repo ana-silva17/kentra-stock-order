@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @AuditOverride(forClass = AuditModel.class)
-@Table
+@Table(name = "orders")
 public class Order extends AuditModel{
 
     @Id
