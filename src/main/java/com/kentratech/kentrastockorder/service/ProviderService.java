@@ -18,4 +18,9 @@ public class ProviderService {
         Optional<Provider> provider = providerRepository.findById(id);
         return provider.orElseThrow(() -> new ResourceNotFoundException(id));
     }
+
+    public Provider save(Provider obj){
+        obj.setId(null);
+        return providerRepository.save(obj);
+    }
 }
