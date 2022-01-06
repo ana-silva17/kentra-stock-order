@@ -25,7 +25,7 @@ public class ProviderController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<Void> save(@Valid @RequestBody Provider obj){
+    public ResponseEntity<Void> save(@RequestBody Provider obj){
         obj = providerService.save(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -41,6 +41,14 @@ public class ProviderController {
     public ResponseEntity<List<Provider>> findAll(){
         List<Provider> list = providerService.findAll();
         return ResponseEntity.ok().body(list);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody Provider obj, @PathVariable Long id){
+        obj.setId(id);
+        obj = providerService.update(obj);
+        return ResponseEntity.noContent().build();
+
     }
 
 }

@@ -34,7 +34,22 @@ public class ProviderService {
         }
     }
 
+    public Provider update(Provider obj){
+        Provider newObj = findById(obj.getId());
+        updateData(newObj, obj);
+        return providerRepository.save(newObj);
+    }
+
     public List<Provider> findAll(){
         return providerRepository.findAll();
+    }
+
+    private void updateData(Provider newObj, Provider obj) {
+        newObj.setCode(obj.getCode());
+        newObj.setName(obj.getName());
+        newObj.setNif(obj.getNif());
+        newObj.setAddress(obj.getAddress());
+        newObj.setPhone(obj.getPhone());
+        newObj.setEmail(obj.getEmail());
     }
 }
