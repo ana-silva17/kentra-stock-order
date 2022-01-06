@@ -9,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/providers")
@@ -34,6 +35,12 @@ public class ProviderController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         providerService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Provider>> findAll(){
+        List<Provider> list = providerService.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
 }
