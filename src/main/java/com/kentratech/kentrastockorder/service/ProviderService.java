@@ -23,4 +23,8 @@ public class ProviderService {
         obj.setId(null);
         return providerRepository.save(obj);
     }
+
+    public void delete(Long id){
+        providerRepository.deleteById(id);
+    }
 }

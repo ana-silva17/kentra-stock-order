@@ -30,4 +30,10 @@ public class ProviderController {
         return ResponseEntity.created(uri).build();
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        providerService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
