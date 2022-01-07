@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/quotes")
 public class QuoteRequestController {
@@ -25,5 +27,11 @@ public class QuoteRequestController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         quoteRequestService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<QuoteRequest>> findAll(){
+        List<QuoteRequest> list = quoteRequestService.findAll();
+        return ResponseEntity.ok().body(list);
     }
 }
