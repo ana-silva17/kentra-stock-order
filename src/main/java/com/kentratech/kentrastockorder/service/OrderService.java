@@ -1,12 +1,14 @@
 package com.kentratech.kentrastockorder.service;
 
 import com.kentratech.kentrastockorder.entity.Order;
+import com.kentratech.kentrastockorder.entity.Provider;
 import com.kentratech.kentrastockorder.repository.OrderRepository;
 import com.kentratech.kentrastockorder.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +28,10 @@ public class OrderService {
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException(id);
         }
+    }
+
+    public List<Order> findAll(){
+
+        return orderRepository.findAll();
     }
 }
