@@ -1,7 +1,9 @@
 package com.kentratech.kentrastockorder.service;
 
 import com.kentratech.kentrastockorder.entity.Provider;
+import com.kentratech.kentrastockorder.repository.OrderRepository;
 import com.kentratech.kentrastockorder.repository.ProviderRepository;
+import com.kentratech.kentrastockorder.repository.QuoteRequestRepository;
 import com.kentratech.kentrastockorder.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -16,6 +18,12 @@ public class ProviderService {
     @Autowired
     private ProviderRepository providerRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private QuoteRequestRepository quoteRequestRepository;
+
     public Provider findById(Long id) {
         Optional<Provider> provider = providerRepository.findById(id);
         return provider.orElseThrow(() -> new ResourceNotFoundException(id));
@@ -23,7 +31,19 @@ public class ProviderService {
 
     public Provider save(Provider obj) {
         obj.setId(null);
-        return providerRepository.save(obj);
+        obj.setCode(obj.getCode());
+        obj.setName(obj.getName());
+        obj.setNif(obj.getNif());
+        obj.setAddress(obj.getAddress());
+        obj.setPhone(obj.getPhone());
+        obj.setEmail(obj.getEmail());
+        obj.getOrder().setProvider(obj);
+        obj.getQuoteRequest().setProvider(obj);
+        obj = providerRepository.save(obj);
+        orderRepository.save(obj.getOrder());
+        quoteRequestRepository.save(obj.getQuoteRequest());
+        return obj;
+//        return providerRepository.save(obj);
     }
 
     public void delete(Long id) {

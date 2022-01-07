@@ -1,7 +1,6 @@
 package com.kentratech.kentrastockorder.service;
 
 import com.kentratech.kentrastockorder.entity.Order;
-import com.kentratech.kentrastockorder.entity.Provider;
 import com.kentratech.kentrastockorder.repository.OrderRepository;
 import com.kentratech.kentrastockorder.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

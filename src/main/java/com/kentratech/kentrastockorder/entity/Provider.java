@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,4 +39,21 @@ public class Provider{
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "provider")
     private QuoteRequest quoteRequest;
 
+    public Provider(Long id, String code, String name, Integer nif, String address, String phone, String email) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.nif = nif;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
+
+
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }
