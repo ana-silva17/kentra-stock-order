@@ -31,7 +31,6 @@ public class QuoteRequest extends AuditModel{
     Timestamp timestamp = new Timestamp(now.getTime());
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String code;
