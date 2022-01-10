@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/orders")
@@ -41,6 +40,7 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<CustomResponse<Order>> getOrders(@RequestParam(name = "sort", defaultValue = "id,DESC", required = false) String order,
+                                                           @RequestParam(name = "code", defaultValue = "", required = false) String code,
                                                            @RequestParam(name = "dateFrom", defaultValue = "", required = false) String dateFrom,
                                                            @RequestParam(name = "dateTo", defaultValue = "", required = false) String dateTo,
                                                            @RequestParam(name = "page", defaultValue = "1", required = false) Integer pageNumber,
@@ -48,7 +48,7 @@ public class OrderController {
 
         String[] parseOrder = order.split(",");
         Sort sort = Sort.by(Sort.Direction.fromOptionalString(parseOrder[1]).get(), parseOrder[0]);
-        Page<Order> list = orderService.getOrders(sort, dateFrom, dateTo, pageNumber, pageSize);
+        Page<Order> list = orderService.getOrders(sort, code, dateFrom, dateTo, pageNumber, pageSize);
         return ResponseEntity.ok(new CustomResponse<>(list));
     }
 

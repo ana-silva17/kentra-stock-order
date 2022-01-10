@@ -53,9 +53,11 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Page<Order> getOrders(Sort sort, String dateFrom, String dateTo, Integer pageNumber, Integer pageSize) {
+    public Page<Order> getOrders(Sort sort, String code, String dateFrom, String dateTo, Integer pageNumber, Integer pageSize) {
 
         Pageable p = PageRequest.of(pageNumber -1 , pageSize, sort);
-        return orderRepositorySpec.findAll(Specification.where(this.orderSpecification.findByBetweenDate(dateFrom, dateTo)),p);
+        return orderRepositorySpec.findAll(Specification.where(
+                this.orderSpecification.findByBetweenDate(dateFrom, dateTo)
+                .and(this.orderSpecification.findByCode(code))),p);
     }
 }
