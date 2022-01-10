@@ -14,6 +14,14 @@ import java.text.SimpleDateFormat;
 @Component
 public class QuoteRequestSpec {
 
+    public Specification<QuoteRequest> findByCode(String code) {
+        if (code == null) {
+            return null;
+        }
+        return (root, query, cb) -> cb.like(root.get(Order_.CODE), "%" + code + "%");
+
+    }
+
     public Specification<QuoteRequest> findByBetweenDate(String dateFrom, String dateTo) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

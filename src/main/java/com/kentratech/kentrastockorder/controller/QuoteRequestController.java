@@ -40,6 +40,7 @@ public class QuoteRequestController {
 
     @GetMapping
     public ResponseEntity<CustomResponse<QuoteRequest>> getQuotes(@RequestParam(name = "sort", defaultValue = "id,DESC", required = false) String order,
+                                                           @RequestParam(name = "code", defaultValue = "", required = false) String code,
                                                            @RequestParam(name = "dateFrom", defaultValue = "", required = false) String dateFrom,
                                                            @RequestParam(name = "dateTo", defaultValue = "", required = false) String dateTo,
                                                            @RequestParam(name = "page", defaultValue = "1", required = false) Integer pageNumber,
@@ -47,7 +48,7 @@ public class QuoteRequestController {
 
         String[] parseOrder = order.split(",");
         Sort sort = Sort.by(Sort.Direction.fromOptionalString(parseOrder[1]).get(), parseOrder[0]);
-        Page<QuoteRequest> list = quoteRequestService.getOrders(sort,dateFrom, dateTo, pageNumber, pageSize);
+        Page<QuoteRequest> list = quoteRequestService.getOrders(sort, code, dateFrom, dateTo, pageNumber, pageSize);
         return ResponseEntity.ok(new CustomResponse<>(list));
     }
 }

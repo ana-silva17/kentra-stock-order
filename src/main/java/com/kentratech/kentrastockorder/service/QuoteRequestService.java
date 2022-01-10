@@ -51,10 +51,11 @@ public class QuoteRequestService {
         return quoteRequestRepository.findAll();
     }
 
-    public Page<QuoteRequest> getOrders(Sort sort, String dateFrom, String dateTo, Integer pageNumber, Integer pageSize) {
+    public Page<QuoteRequest> getOrders(Sort sort, String code, String dateFrom, String dateTo, Integer pageNumber, Integer pageSize) {
 
         Pageable p = PageRequest.of(pageNumber -1 , pageSize, sort);
         return quoteRequestRepositorySpec.findAll(Specification.where(
-                this.quoteRequestSpec.findByBetweenDate(dateFrom, dateTo)),p);
+                this.quoteRequestSpec.findByCode(code)
+                .and(this.quoteRequestSpec.findByBetweenDate(dateFrom, dateTo))),p);
     }
 }
