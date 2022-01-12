@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.envers.AuditOverride;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +18,8 @@ import javax.persistence.*;
 @Entity
 @AuditOverride(forClass = AuditModel.class)
 @Table
-public class OrderDetail extends AuditModel{
+public class OrderDetail extends AuditModel implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +33,19 @@ public class OrderDetail extends AuditModel{
     private String code;
 
     private Integer quantity;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OrderDetail)) return false;
+        OrderDetail that = (OrderDetail) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
 
 }

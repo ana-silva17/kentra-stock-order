@@ -4,6 +4,7 @@ import com.kentratech.kentrastockorder.entity.OrderDetail;
 import com.kentratech.kentrastockorder.repository.OrderDetailRepository;
 import com.kentratech.kentrastockorder.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,5 +23,13 @@ public class OrderDetailService {
     public OrderDetail save(OrderDetail obj) {
         obj.setId(null);
         return orderDetailRepository.save(obj);
+    }
+
+    public void delete(Long id) {
+        try {
+            orderDetailRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 }

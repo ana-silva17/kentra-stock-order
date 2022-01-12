@@ -28,4 +28,10 @@ public class OrderDetailController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        orderDetailService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
