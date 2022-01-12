@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.envers.AuditOverride;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +19,8 @@ import java.util.Objects;
 @Entity
 @AuditOverride(forClass = AuditModel.class)
 @Table(name = "orders")
-public class Order extends AuditModel{
+public class Order extends AuditModel implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)

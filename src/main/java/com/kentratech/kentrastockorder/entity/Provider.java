@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -14,7 +15,8 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table
-public class Provider{
+public class Provider implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

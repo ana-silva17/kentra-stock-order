@@ -59,7 +59,7 @@ public class ProviderController {
                                                                  @RequestParam(name = "code", defaultValue = "", required = false) String code,
                                                                  @RequestParam(name = "name", defaultValue = "", required = false) String name,
                                                                  @RequestParam(name = "page", defaultValue = "1", required = false) Integer pageNumber,
-                                                                 @RequestParam(name = "sort", defaultValue = "30", required = false) Integer pageSize){
+                                                                 @RequestParam(name = "size", defaultValue = "30", required = false) Integer pageSize){
 
         String[] parseOrder = orderBy.split(",");
         Sort sort = Sort.by(Sort.Direction.fromOptionalString(parseOrder[1]).get(), parseOrder[0]);
