@@ -18,4 +18,9 @@ public class OrderDetailService {
         Optional<OrderDetail> orderDetail = orderDetailRepository.findById(id);
         return orderDetail.orElseThrow(() -> new ResourceNotFoundException(id));
     }
+
+    public OrderDetail save(OrderDetail obj) {
+        obj.setId(null);
+        return orderDetailRepository.save(obj);
+    }
 }
