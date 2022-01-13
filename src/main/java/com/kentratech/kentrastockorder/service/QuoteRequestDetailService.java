@@ -1,10 +1,10 @@
 package com.kentratech.kentrastockorder.service;
 
-import com.kentratech.kentrastockorder.entity.OrderDetail;
 import com.kentratech.kentrastockorder.entity.QuoteRequestDetail;
 import com.kentratech.kentrastockorder.repository.QuoteRequestDetailRepository;
 import com.kentratech.kentrastockorder.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,5 +23,13 @@ public class QuoteRequestDetailService {
     public QuoteRequestDetail save(QuoteRequestDetail obj) {
         obj.setId(null);
         return quoteRequestDetailRepository.save(obj);
+    }
+
+    public void delete(Long id) {
+        try {
+            quoteRequestDetailRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 }

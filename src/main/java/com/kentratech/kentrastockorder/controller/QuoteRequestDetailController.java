@@ -1,8 +1,6 @@
 package com.kentratech.kentrastockorder.controller;
 
-import com.kentratech.kentrastockorder.entity.OrderDetail;
 import com.kentratech.kentrastockorder.entity.QuoteRequestDetail;
-import com.kentratech.kentrastockorder.repository.QuoteRequestDetailRepository;
 import com.kentratech.kentrastockorder.service.QuoteRequestDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +27,11 @@ public class QuoteRequestDetailController {
         obj = quoteRequestDetailService.save(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        quoteRequestDetailService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

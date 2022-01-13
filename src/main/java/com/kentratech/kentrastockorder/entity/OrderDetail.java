@@ -25,7 +25,7 @@ public class OrderDetail extends AuditModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //
+    //JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
