@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/quoteRequestDetails")
@@ -33,5 +34,11 @@ public class QuoteRequestDetailController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         quoteRequestDetailService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<QuoteRequestDetail>> findAll(){
+        List<QuoteRequestDetail> list = quoteRequestDetailService.findAll();
+        return ResponseEntity.ok().body(list);
     }
 }
