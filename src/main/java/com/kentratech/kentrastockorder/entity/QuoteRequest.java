@@ -46,6 +46,7 @@ public class QuoteRequest extends AuditModel{
 
     private Timestamp date = timestamp;
 
+    @JsonIgnore
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "quoteRequest")
     private List<QuoteRequestDetail> quoteRequestDetailList = new ArrayList<>();

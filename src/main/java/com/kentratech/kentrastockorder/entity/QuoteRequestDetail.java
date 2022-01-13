@@ -1,5 +1,6 @@
 package com.kentratech.kentrastockorder.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class QuoteRequestDetail extends AuditModel{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "quote_request_id")
     private QuoteRequest quoteRequest;

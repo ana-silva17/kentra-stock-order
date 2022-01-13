@@ -48,6 +48,7 @@ public class Order extends AuditModel implements Serializable {
 
     private Timestamp date = timestamp;
 
+    @JsonIgnore
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetailList = new ArrayList<>();
