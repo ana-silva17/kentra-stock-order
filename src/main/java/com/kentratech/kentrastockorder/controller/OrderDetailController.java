@@ -1,6 +1,7 @@
 package com.kentratech.kentrastockorder.controller;
 
 import com.kentratech.kentrastockorder.entity.OrderDetail;
+import com.kentratech.kentrastockorder.entity.QuoteRequestDetail;
 import com.kentratech.kentrastockorder.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/orderDetails")
@@ -33,5 +35,11 @@ public class OrderDetailController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         orderDetailService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<OrderDetail>> findAll(){
+        List<OrderDetail> list = orderDetailService.findAll();
+        return ResponseEntity.ok().body(list);
     }
 }
